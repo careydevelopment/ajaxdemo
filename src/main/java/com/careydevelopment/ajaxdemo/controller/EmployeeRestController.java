@@ -17,61 +17,62 @@ public class EmployeeRestController {
     public RestResponse singleEmployee(@PathVariable String employeeId) {
         //instantiate the response object
         RestResponse response = new RestResponse();
-    	
-    	//set the employee to null
-    	Employee returnedEmployee = null;
-    	
-    	//grab all employees
-    	List<Employee> allEmployees = getAllEmployees();
-    	
-    	//look for a match
-    	for (Employee employee : allEmployees) {
-    	    if (employee.getEmployeeId().equals(employeeId)) {
-    	        returnedEmployee = employee;
-    	        break;
-    	    }
-    	}
-    	
-    	if (returnedEmployee == null) {
-    	    //the URL contains an unknown employee id - we'll return an empty response
-    	    response.setResponseStatus(RestResponse.NOT_FOUND);
-    	    response.setResponse("");
-    	} else {
-    	    //good response if we get here
-    	    response.setResponseStatus(RestResponse.OK);
-    	    response.setResponse(returnedEmployee);
-    	}
-    	
-    	return response;
+
+        //set the employee to null
+        Employee returnedEmployee = null;
+
+        //grab all employees
+        List<Employee> allEmployees = getAllEmployees();
+
+        //look for a match
+        for (Employee employee : allEmployees) {
+            if (employee.getEmployeeId().equals(employeeId)) {
+                returnedEmployee = employee;
+                break;
+            }
+        }
+
+        if (returnedEmployee == null) {
+            //the URL contains an unknown employee id - we'll return an empty response
+            response.setResponseStatus(RestResponse.NOT_FOUND);
+            response.setResponse("");
+        } else {
+            //good response if we get here
+            response.setResponseStatus(RestResponse.OK);
+            response.setResponse(returnedEmployee);
+        }
+	
+        return response;
     }
-    
-    
+
+
     @RequestMapping("/employees")
     public RestResponse allEmployees() {
         //instantiate the response object
         RestResponse response = new RestResponse();
-    	
+
         //retrieve list of employees
         List<Employee> allEmployees = getAllEmployees();		
-    	
+
         //make sure we've got employees
         if (allEmployees != null && allEmployees.size() > 0) {
             response.setResponseStatus(RestResponse.OK);
-    		
+	
             //put the list in the response object
             response.setResponse(allEmployees);
         } else {
             response.setResponseStatus(RestResponse.NOT_FOUND);
             response.setResponse(new ArrayList<Employee>());
         }
-    	
+	
         return response;
     }
+
     
     //returns a list of all employees
     private List<Employee> getAllEmployees() {
         List<Employee> allEmployees = new ArrayList<Employee>();
-    	
+	
         Employee emp1 = new Employee();
         emp1.setDepartment("Accounting");
         emp1.setEmployeeId("A552");
@@ -80,7 +81,7 @@ public class EmployeeRestController {
         emp1.setHoursPerWeek(40);
         emp1.setImageFile("dannydevito.jpg");
         allEmployees.add(emp1);
-    
+        
         Employee emp2 = new Employee();
         emp2.setDepartment("Marketing");
         emp2.setEmployeeId("B112");
@@ -89,7 +90,7 @@ public class EmployeeRestController {
         emp2.setHoursPerWeek(30);
         emp2.setImageFile("darthvader.jpg");
         allEmployees.add(emp2);
-    	
+        
         Employee emp3 = new Employee();
         emp3.setDepartment("Shipping");
         emp3.setEmployeeId("C997");
@@ -98,7 +99,7 @@ public class EmployeeRestController {
         emp3.setHoursPerWeek(40);
         emp3.setImageFile("rogerrabbit.jpg");
         allEmployees.add(emp3);
-    
+        
         Employee emp4 = new Employee();
         emp4.setDepartment("Finance");
         emp4.setEmployeeId("A703");

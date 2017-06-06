@@ -19,5 +19,4 @@ public class AjaxDemoController {
     public String home(Model model) {
         return "redirect:ajaxDemo";
     }
-
 }
